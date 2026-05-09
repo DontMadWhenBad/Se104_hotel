@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Nhà Nghỉ | Trang Chủ</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Thư viện Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Cấu hình Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- CSS Tuỳ chỉnh thêm cho mượt mà -->
+    <style>
+        /* Tùy chỉnh thanh cuộn */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased h-screen flex overflow-hidden">
+
+    <!-- Nền mờ cho Mobile Menu -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-30 transition-opacity opacity-0 hidden md:hidden"></div>
+
+    <!-- Thanh Menu Bên Trái (Sidebar) -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-white border-r border-slate-200 flex flex-col transition-transform duration-300 z-40 md:relative md:translate-x-0 -translate-x-full shadow-2xl md:shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
+        
+        <!-- Logo -->
+        <div class="h-16 flex items-center justify-between px-6 border-b border-slate-100">
+            <div class="flex items-center gap-3 text-indigo-600">
+                <i data-lucide="building" class="w-6 h-6"></i>
+                <span class="text-xl font-bold tracking-tight">Motel<span class="text-slate-800">Pro</span></span>
+            </div>
+            <!-- Nút đóng trên Mobile -->
+            <button id="close-sidebar-btn" class="md:hidden text-slate-400 hover:text-slate-600 p-2 -mr-2 rounded-lg">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        
+        <!-- Menu Navigation -->
+        <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+            <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 bg-indigo-50 text-indigo-700 rounded-lg font-medium transition-colors">
+                <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                Sơ đồ phòng
+            </a>
+            <a href="customers.html" class="flex items-center gap-3 px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg font-medium transition-colors">
+                <i data-lucide="users" class="w-5 h-5"></i>
+                Danh sách khách
+            </a>
+            <a href="revenue.html" id="menu-revenue" class="flex items-center gap-3 px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg font-medium transition-colors">
+                <i data-lucide="pie-chart" class="w-5 h-5"></i>
+                Doanh thu
+            </a>
+            <a href="services.html" class="flex items-center gap-3 px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg font-medium transition-colors">
+                <i data-lucide="coffee" class="w-5 h-5"></i>
+                Dịch vụ phòng
+            </a>
+        </nav>
+        
+        <!-- User Profile -->
+        <div class="p-4 border-t border-slate-100 relative">
+            <!-- Account Toggle Button -->
+            <button id="account-toggle-btn" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-colors group">
+                <div id="profile-avatar" class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                    A
+                </div>
+                <div class="text-left flex-1 min-w-0">
+                    <p id="profile-name" class="text-sm font-semibold text-slate-800 truncate">Đang tải...</p>
+                    <p id="profile-role" class="text-xs text-slate-500 truncate">Đang tải...</p>
+                </div>
+                <i data-lucide="chevron-up" class="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors"></i>
+            </button>
+
+            <!-- Account Popover Menu -->
+            <div id="account-popover" class="absolute bottom-full left-4 right-4 mb-2 bg-white border border-slate-200 rounded-2xl shadow-2xl p-2 hidden z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
+                <button id="view-profile-btn" class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-lg transition-colors text-left">
+                    <i data-lucide="user-circle" class="w-4 h-4 text-indigo-600"></i>
+                    Thông tin cá nhân
+                </button>
+                <a href="users.html" id="popover-menu-users" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-lg transition-colors">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-indigo-600"></i>
+                    Quản lý người dùng
+                </a>
+                <hr class="my-1 border-slate-100">
+                <button id="logout-btn" class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-rose-600 hover:bg-rose-50 rounded-lg transition-colors text-left">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                    Đăng xuất
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Khu Vực Chính (Main Content) -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+        
+        <!-- Header -->
+        <header class="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-6 z-10 sticky top-0">
+            <div class="flex items-center gap-4">
+                <button id="mobile-menu-btn" class="md:hidden text-slate-500 hover:text-slate-700 p-1 -ml-1 rounded-lg">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+                <h1 class="text-xl font-semibold text-slate-800">Sơ đồ phòng hôm nay</h1>
+            </div>
+            
+            <!-- Chú thích màu sắc (Legend) -->
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 text-sm bg-white border border-slate-200 rounded-full px-4 py-1.5 shadow-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <span class="text-slate-600 mr-2">Trống</span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> <span class="text-slate-600 mr-2">Đang thuê</span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> <span class="text-slate-600">Đang dọn</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Lưới Hiển Thị 10 Phòng (Room Grid) -->
+        <div class="flex-1 p-6 overflow-y-auto">
+            <div id="room-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
+                <!-- Javascript sẽ tạo thẻ HTML cho các phòng và nhúng vào đây -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Cửa sổ bật lên (Popup/Modal) khi nhấn vào phòng -->
+    <div id="room-modal" class="fixed inset-0 z-50 hidden">
+        <!-- Nền mờ phía sau -->
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity opacity-0" id="modal-backdrop"></div>
+        
+        <!-- Nội dung Modal -->
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
+            <div class="relative bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:max-w-lg w-full opacity-0 scale-95 max-h-[90vh] flex flex-col" id="modal-panel">
+                
+                <!-- Tiêu đề Modal -->
+                <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 flex-shrink-0">
+                    <div>
+                        <h3 class="text-lg leading-6 font-bold text-slate-900" id="modal-title">
+                            Phòng ...
+                        </h3>
+                        <p class="text-sm text-slate-500 mt-1" id="modal-subtitle">Cập nhật thông tin phòng.</p>
+                    </div>
+                    <button type="button" id="close-modal" class="text-slate-400 hover:text-slate-500 hover:bg-slate-100 p-2 rounded-full transition-colors">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- Form nhập liệu -->
+                <div class="px-6 py-6 space-y-6 flex-1 overflow-y-auto scroll-smooth">
+                    
+                    <!-- Khu vực Duyệt Đặt phòng (Sẽ ẩn/hiện) -->
+                    <div id="pending-action-group" class="p-4 bg-orange-50 border border-orange-200 rounded-xl hidden">
+                        <h4 class="text-sm font-bold text-orange-800 mb-1 flex items-center gap-2">
+                            <i data-lucide="bell-ring" class="w-4 h-4"></i> Yêu cầu Đặt phòng mới
+                        </h4>
+                        <p id="pending-request-info" class="text-sm text-orange-700 mb-3 mt-2">Người đặt: Đang tải...</p>
+                        <div class="flex gap-3">
+                            <button type="button" id="approve-btn" class="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm">
+                                Duyệt nhận phòng
+                            </button>
+                            <button type="button" id="reject-btn" class="flex-1 py-2 bg-white border border-rose-200 text-rose-600 hover:bg-rose-50 text-sm font-semibold rounded-lg transition-colors">
+                                Từ chối
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Cảnh báo Yêu cầu Trả phòng (Sẽ ẩn/hiện) -->
+                    <div id="checkout-alert-group" class="p-4 bg-purple-50 border border-purple-200 rounded-xl hidden">
+                        <h4 class="text-sm font-bold text-purple-800 flex items-center gap-2">
+                            <i data-lucide="alert-circle" class="w-4 h-4"></i> Khách hàng đang yêu cầu thanh toán và trả phòng!
+                        </h4>
+                        <p class="text-xs text-purple-700 mt-1 ml-6">Vui lòng kiểm tra lại thông tin và bấm nút <strong>Trả phòng</strong> bên dưới.</p>
+                    </div>
+
+                    <form id="booking-form" class="space-y-6">
+                        
+                        <!-- Lựa chọn trạng thái phòng -->
+                        <div id="status-radio-group">
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Trạng thái phòng</label>
+                            <div class="grid grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="status" value="empty" class="peer sr-only">
+                                    <div class="text-center px-2 py-2.5 rounded-lg border border-slate-200 text-sm font-medium text-slate-600 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all hover:bg-slate-50">
+                                        Trống
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="status" value="occupied" class="peer sr-only">
+                                    <div class="text-center px-2 py-2.5 rounded-lg border border-slate-200 text-sm font-medium text-slate-600 peer-checked:border-rose-500 peer-checked:bg-rose-50 peer-checked:text-rose-700 transition-all hover:bg-slate-50">
+                                        Có khách
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="status" value="cleaning" class="peer sr-only">
+                                    <div class="text-center px-2 py-2.5 rounded-lg border border-slate-200 text-sm font-medium text-slate-600 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-700 transition-all hover:bg-slate-50">
+                                        Đang dọn
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Cài đặt giá phòng (Admin chỉnh) -->
+                        <div id="room-price-group" class="p-4 bg-amber-50 border border-amber-200 rounded-xl space-y-4">
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-bold text-amber-800 flex items-center gap-2 uppercase tracking-wider">
+                                    <i data-lucide="settings-2" class="w-4 h-4"></i>
+                                    Cài đặt giá phòng
+                                </label>
+                                <span id="room-price-note" class="text-[11px] text-amber-600 font-medium bg-amber-100 px-2 py-0.5 rounded-full hidden">
+                                    Áp dụng lần trống tiếp theo
+                                </span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-1.5">
+                                    <label class="text-[11px] font-bold text-amber-600 uppercase">Theo đêm (VNĐ)</label>
+                                    <div class="relative">
+                                        <input type="number" id="room-price-night" class="w-full pl-3 pr-8 py-2 bg-white border border-amber-200 rounded-lg text-sm font-bold text-slate-800 focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none" placeholder="0">
+                                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-amber-400">đ</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label class="text-[11px] font-bold text-amber-600 uppercase">Theo giờ (VNĐ)</label>
+                                    <div class="relative">
+                                        <input type="number" id="room-price-hour" class="w-full pl-3 pr-8 py-2 bg-white border border-amber-200 rounded-lg text-sm font-bold text-slate-800 focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none" placeholder="0">
+                                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-amber-400">đ</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Các trường thông tin khách hàng (Sẽ ẩn/hiện) -->
+                        <div id="customer-info-group" class="space-y-4">
+                            <!-- Tên khách hàng -->
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Tên khách hàng <span class="text-rose-500">*</span></label>
+                                <input type="text" id="customer-name" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all" placeholder="Ví dụ: Nguyễn Văn A">
+                                <p id="error-name" class="text-rose-500 text-xs mt-1 hidden font-medium"></p>
+                            </div>
+
+                            <!-- Dịch vụ đã sử dụng -->
+                            <div id="services-usage-group" class="hidden">
+                                <label class="block text-sm font-semibold text-slate-700 mb-1.5 flex items-center justify-between">
+                                    <span>Dịch vụ đã dùng</span>
+                                    <span id="modal-service-total" class="text-indigo-600 font-bold">0đ</span>
+                                </label>
+                                <div id="modal-services-list" class="bg-indigo-50/50 border border-indigo-100 rounded-xl p-3 space-y-2 max-h-32 overflow-y-auto text-sm">
+                                    <!-- JS render list dịch vụ ở đây -->
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Số CCCD</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i data-lucide="id-card" class="w-5 h-5 text-slate-400"></i>
+                                        </div>
+                                        <input type="text" id="customer-cccd" class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 sm:text-sm transition-colors outline-none placeholder-slate-400" placeholder="001xxxxxxxxx">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Số điện thoại</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i data-lucide="phone" class="w-5 h-5 text-slate-400"></i>
+                                        </div>
+                                        <input type="text" id="customer-phone" class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 sm:text-sm transition-colors outline-none placeholder-slate-400" placeholder="09xxxxxxxx">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Giờ nhận phòng -->
+                            <div>
+                                <label for="check-in-time" class="block text-sm font-semibold text-slate-700 mb-1.5">Giờ nhận phòng</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i data-lucide="clock" class="w-5 h-5 text-slate-400"></i>
+                                    </div>
+                                    <input type="datetime-local" id="check-in-time" class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 sm:text-sm transition-colors outline-none text-slate-700">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Nút Lưu / Hủy -->
+                <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-3">
+                    <button type="button" id="checkout-btn" class="px-4 py-2.5 bg-rose-50 text-rose-600 border border-rose-200 rounded-xl text-sm font-medium hover:bg-rose-100 transition-colors hidden">
+                        <i data-lucide="log-out" class="w-4 h-4 inline-block mr-1 mb-0.5"></i> Trả phòng
+                    </button>
+                    <div class="flex items-center gap-3 ml-auto">
+                        <button type="button" id="cancel-btn" class="px-5 py-2.5 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-sm">
+                            Hủy
+                        </button>
+                        <button type="button" id="save-btn" class="px-5 py-2.5 bg-indigo-600 border border-transparent rounded-xl text-sm font-medium text-white hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-600/20">
+                            Lưu thay đổi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thông tin cá nhân -->
+    <div id="profile-modal" class="fixed inset-0 z-[60] flex items-center justify-center hidden">
+        <div id="profile-modal-backdrop" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+        <div id="profile-modal-panel" class="relative bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden transition-all duration-300 opacity-0 scale-95 mx-4">
+            <div class="bg-indigo-600 p-8 text-white text-center relative">
+                <div id="modal-profile-avatar" class="w-24 h-24 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-4xl font-bold mx-auto mb-4 border-4 border-white/30">A</div>
+                <h2 id="modal-profile-name" class="text-2xl font-bold mb-1">...</h2>
+                <span id="modal-profile-role" class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold tracking-wide uppercase">...</span>
+            </div>
+            <div class="p-8 space-y-6">
+                <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-indigo-600 shadow-sm border border-slate-100">
+                        <i data-lucide="phone" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Số điện thoại / CCCD</p>
+                        <p id="modal-profile-id" class="text-lg font-bold text-slate-800">...</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-emerald-600 shadow-sm border border-slate-100">
+                        <i data-lucide="user-check" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Trạng thái tài khoản</p>
+                        <p class="text-sm font-bold text-emerald-600 flex items-center gap-1">
+                            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                            Đang hoạt động
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 bg-slate-50 border-t border-slate-100">
+                <button id="close-profile-modal" class="w-full py-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-50 transition-all shadow-sm active:scale-[0.98]">
+                    Đóng cửa sổ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script kết nối JS -->
+    <script src="js/layout.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
