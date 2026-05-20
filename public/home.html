@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Manager Pro - Quản lý nhà nghỉ chuyên nghiệp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transition: all 0.3s ease;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .button-secondary {
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .button-secondary:hover {
+            background: #eff6ff;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-600 rounded-lg shadow-lg">
+                    <i data-lucide="hotel" class="w-6 h-6 text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold text-gray-800">Hotel Manager Pro</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="index.html?tab=login" class="px-6 py-2.5 text-blue-600 font-semibold hover:text-blue-700 transition">Đăng nhập</a>
+                <a href="index.html?tab=register" class="px-6 py-2.5 button-primary text-white rounded-lg font-semibold">Đăng ký</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto px-6 py-24 md:py-32 flex flex-col items-center text-center">
+            <h2 class="text-5xl md:text-6xl font-black mb-6 leading-tight text-balance">
+                Quản lý Nhà nghỉ <br>Dễ dàng & Hiệu quả
+            </h2>
+            <p class="text-xl md:text-2xl text-blue-100 mb-10 max-w-2xl text-balance">
+                Nền tảng quản lý hoàn toàn cho nhà nghỉ của bạn. Từ sơ đồ phòng, quản lý dịch vụ đến báo cáo doanh thu - tất cả trong một hệ thống thông minh.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="index.html?tab=register" class="px-8 py-4 bg-white text-blue-600 rounded-lg font-bold text-lg hover:bg-blue-50 transition shadow-lg">
+                    Bắt đầu miễn phí
+                </a>
+                <a href="index.html?tab=login" class="px-8 py-4 bg-blue-500 text-white rounded-lg font-bold text-lg hover:bg-blue-600 transition border-2 border-blue-400">
+                    Đăng nhập
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl mx-auto mb-16">
+                <h3 class="text-4xl md:text-5xl font-black text-gray-800 mb-6 text-balance">
+                    Về Hotel Manager Pro
+                </h3>
+                <p class="text-xl text-gray-600 leading-relaxed">
+                    Hotel Manager Pro là giải pháp quản lý nhà nghỉ toàn diện, được thiết kế đặc biệt cho các cơ sở lưu trú tại Việt Nam. Hệ thống cung cấp các công cụ mạnh mẽ để giúp bạn quản lý phòng, dịch vụ, nhân viên và doanh thu một cách hiệu quả.
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="layout-dashboard" class="w-7 h-7 text-blue-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Sơ đồ phòng trực quan</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Quản lý trạng thái phòng theo thời gian thực. Dễ dàng theo dõi phòng trống, phòng đang sử dụng, phòng cần vệ sinh.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="coffee" class="w-7 h-7 text-green-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Quản lý dịch vụ & Minibar</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Cấu hình và quản lý các dịch vụ bổ sung. Tự động cập nhật tồn kho và doanh thu từ dịch vụ.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="bar-chart-3" class="w-7 h-7 text-orange-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Báo cáo doanh thu chi tiết</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Xem báo cáo doanh thu theo ngày, theo loại phòng. Phân tích doanh thu phòng và dịch vụ một cách chi tiết.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="users" class="w-7 h-7 text-purple-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Quản lý nhân viên</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Quản lý tài khoản nhân viên, phân quyền theo vai trò. Lễ tân, quản lý - mỗi vai trò có quyền hạn phù hợp.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="clock" class="w-7 h-7 text-indigo-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Giao ca & Chốt tiền</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Quản lý giao ca hàng ngày. Lưu giữ lịch sử ca trực và chốt tiền để kiểm soát doanh thu.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="w-14 h-14 bg-red-100 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="credit-card" class="w-7 h-7 text-red-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Hóa đơn điện tử</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Lưu giữ và tra cứu lịch sử hóa đơn. Dễ dàng kiểm tra các giao dịch trong quá khứ.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 md:py-28 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h3 class="text-4xl md:text-5xl font-black text-gray-800 mb-6 text-balance">
+                Sẵn sàng quản lý nhà nghỉ một cách thông minh?
+            </h3>
+            <p class="text-xl text-gray-600 mb-10">
+                Hãy bắt đầu sử dụng Hotel Manager Pro hôm nay. Miễn phí cho 30 ngày đầu.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="index.html?tab=register" class="px-8 py-4 button-primary text-white rounded-lg font-bold text-lg shadow-lg">
+                    Đăng ký miễn phí
+                </a>
+                <a href="index.html?tab=login" class="px-8 py-4 button-secondary rounded-lg font-bold text-lg">
+                    Đã có tài khoản? Đăng nhập
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h5 class="text-white font-bold mb-4">Hotel Manager Pro</h5>
+                    <p class="text-sm">Giải pháp quản lý nhà nghỉ toàn diện cho Việt Nam</p>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-4">Sản phẩm</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Tính năng</a></li>
+                        <li><a href="#" class="hover:text-white transition">Bảng giá</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-4">Công ty</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Về chúng tôi</a></li>
+                        <li><a href="#" class="hover:text-white transition">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-4">Pháp lý</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Điều khoản dịch vụ</a></li>
+                        <li><a href="#" class="hover:text-white transition">Chính sách riêng tư</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2024 Hotel Manager Pro. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Handle URL parameters for navigation
+        const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get('tab');
+        
+        if (tab === 'login' || tab === 'register') {
+            // Redirect to index.html with hash to show auth
+            window.location.href = `index.html#${tab}`;
+        }
+
+        // Initialize lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
