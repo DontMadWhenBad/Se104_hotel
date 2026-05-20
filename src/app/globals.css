@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  background-color: #f9fafb;
+  color: #1f2937;
+}
+
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --color-primary: #0066cc;
+  --color-primary-dark: #0052a3;
+  --color-primary-light: #e6f2ff;
+  --color-secondary: #f0f4f8;
+  --color-accent: #00d4ff;
+  --color-success: #10b981;
+  --color-neutral: #6b7280;
+  --color-neutral-dark: #1f2937;
+  --color-neutral-light: #f9fafb;
+  --color-white: #ffffff;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* Buttons */
+button, a.btn {
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Smooth scrolling for navigation */
+a[href^="#"] {
+  scroll-behavior: smooth;
+}
