@@ -14,11 +14,23 @@ import { openCheckIn, confirmCheckIn, openBillModal, confirmCheckOut } from './m
 document.addEventListener('DOMContentLoaded', async () => {
     checkAuth();
     if (currentUser) {
+        // Ẩn trang chủ, hiển thị ứng dụng chính
+        document.getElementById('homepage-screen').classList.add('hidden-section');
+        document.getElementById('auth-screen').classList.add('hidden-section');
+        document.getElementById('main-sidebar').classList.remove('hidden-section');
+        document.getElementById('main-content').classList.remove('hidden-section');
+        
         // Chỉ tự động bắt đầu ca nếu chưa chốt tiền trong phiên này
         if (localStorage.getItem('shift_ended') !== 'true') {
             fetch(`${API_URL}/shifts/start/${currentUser.id}`, { method: 'POST' });
         }
         showSection('rooms', { rooms: fetchRooms });
+    } else {
+        // Hiển thị trang chủ nếu chưa đăng nhập
+        document.getElementById('homepage-screen').classList.remove('hidden-section');
+        document.getElementById('auth-screen').classList.add('hidden-section');
+        document.getElementById('main-sidebar').classList.add('hidden-section');
+        document.getElementById('main-content').classList.add('hidden-section');
     }
     lucide.createIcons();
 });
@@ -44,6 +56,21 @@ window.toggleAuth = (type) => {
     document.getElementById('login-form').classList.toggle('hidden-section', type === 'register');
     document.getElementById('register-form').classList.toggle('hidden-section', type === 'login');
     lucide.createIcons();
+};
+
+// Hàm chuyển đến trang đăng nhập
+window.goToAuth = () => {
+    document.getElementById('homepage-screen').classList.add('hidden-section');
+    document.getElementById('auth-screen').classList.remove('hidden-section');
+    lucide.createIcons();
+};
+
+// Hàm scroll đến phần tính năng
+window.scrollToFeatures = () => {
+    const featuresSection = document.getElementById('features-section');
+    if (featuresSection) {
+        featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
 };
 
 window.openAddRoomModal = openAddRoomModal;

@@ -61,8 +61,225 @@
 
 <body class="flex h-screen overflow-hidden bg-[#f3f3f3]">
 
+    <!-- Homepage Screen -->
+    <div id="homepage-screen" class="w-full flex flex-col">
+        <!-- Header Navigation -->
+        <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-blue-600 rounded-lg shadow-lg">
+                        <i data-lucide="hotel" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800">Hotel Pro</h1>
+                </div>
+                <button onclick="goToAuth()" class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all shadow-md">Đăng nhập</button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="flex-1 overflow-y-auto">
+            <section class="bg-gradient-to-b from-blue-50 to-white py-20 px-6">
+                <div class="max-w-5xl mx-auto text-center">
+                    <h2 class="text-5xl font-black text-gray-900 mb-6">Quản Lý Nhà Nghỉ Chuyên Nghiệp</h2>
+                    <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                        Giải pháp quản lý toàn diện cho nhà nghỉ, khách sạn. Tăng hiệu suất kinh doanh, quản lý phòng, tính tiền, báo cáo doanh thu một cách dễ dàng và hiệu quả.
+                    </p>
+                    <div class="flex gap-4 justify-center mb-16">
+                        <button onclick="scrollToFeatures()" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200">
+                            Xem Tính Năng
+                        </button>
+                        <button onclick="goToAuth()" class="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-bold hover:bg-blue-50 transition-all">
+                            Đăng Ký / Đăng Nhập
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features-section" class="py-20 px-6 bg-white">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h3 class="text-4xl font-black text-gray-900 mb-4">Tính Năng Chính</h3>
+                        <p class="text-lg text-gray-600">Mọi công cụ bạn cần để quản lý nhà nghỉ thành công</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Feature 1 -->
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all hover:border-blue-300">
+                            <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                                <i data-lucide="layout-dashboard" class="w-7 h-7 text-blue-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Sơ Đồ Phòng Trực Quan</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                Quản lý trạng thái phòng một cách trực quan, dễ dàng theo dõi phòng trống, đang sử dụng, cần dọn dẹp.
+                            </p>
+                        </div>
+
+                        <!-- Feature 2 -->
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all hover:border-blue-300">
+                            <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                                <i data-lucide="credit-card" class="w-7 h-7 text-green-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Quản Lý Thanh Toán</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                Tính tiền chính xác, hỗ trợ nhiều loại phòng, giá theo giờ, ngày đêm. Quản lý hóa đơn dễ dàng.
+                            </p>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all hover:border-blue-300">
+                            <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                                <i data-lucide="coffee" class="w-7 h-7 text-orange-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Dịch Vụ Minibar</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                Quản lý dịch vụ, minibar, đồ uống. Tính giá tự động, cập nhật tồn kho theo thời gian thực.
+                            </p>
+                        </div>
+
+                        <!-- Feature 4 -->
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all hover:border-blue-300">
+                            <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                                <i data-lucide="bar-chart-3" class="w-7 h-7 text-purple-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Báo Cáo & Thống Kê</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                Xem báo cáo doanh thu chi tiết, biểu đồ phân tích, theo dõi hiệu suất kinh doanh hàng ngày.
+                            </p>
+                        </div>
+
+                        <!-- Feature 5 -->
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all hover:border-blue-300">
+                            <div class="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
+                                <i data-lucide="users" class="w-7 h-7 text-pink-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Quản Lý Nhân Viên</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                Tạo tài khoản, quản lý quyền hạn nhân viên. Giao ca trực, chốt tiền, theo dõi hoạt động.
+                            </p>
+                        </div>
+
+                        <!-- Feature 6 -->
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all hover:border-blue-300">
+                            <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                                <i data-lucide="clock" class="w-7 h-7 text-red-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Giao Ca & Chốt Tiền</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                Quản lý ca trực nhân viên, chốt tiền cuối ca, lịch sử giao ca, tính toán tiền chính xác.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Section -->
+            <section class="py-20 px-6 bg-blue-50">
+                <div class="max-w-5xl mx-auto">
+                    <h3 class="text-4xl font-black text-gray-900 mb-12 text-center">Vì Sao Chọn Hotel Pro?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600">
+                                    <i data-lucide="check" class="w-6 h-6 text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-1">Giao Diện Đơn Giản</h4>
+                                <p class="text-gray-600">Dễ sử dụng, không cần đào tạo phức tạp, nhân viên có thể bắt đầu ngay.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600">
+                                    <i data-lucide="check" class="w-6 h-6 text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-1">Hiệu Suất Cao</h4>
+                                <p class="text-gray-600">Xử lý nhanh chóng, ổn định, phục vụ nhiều phòng cùng lúc.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600">
+                                    <i data-lucide="check" class="w-6 h-6 text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-1">An Toàn Dữ Liệu</h4>
+                                <p class="text-gray-600">Bảo mật thông tin khách hàng, lịch sử giao dịch được lưu trữ đầy đủ.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600">
+                                    <i data-lucide="check" class="w-6 h-6 text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-1">Hỗ Trợ Tốt</h4>
+                                <p class="text-gray-600">Hỗ trợ kỹ thuật, cập nhật tính năng thường xuyên, lắng nghe phản hồi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-20 px-6 bg-white">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h3 class="text-4xl font-black text-gray-900 mb-6">Sẵn Sàng Bắt Đầu?</h3>
+                    <p class="text-xl text-gray-600 mb-10">Tạo tài khoản ngay hôm nay và bắt đầu quản lý nhà nghỉ chuyên nghiệp.</p>
+                    <button onclick="goToAuth()" class="px-10 py-4 bg-blue-600 text-white rounded-lg font-bold text-lg hover:bg-blue-700 transition-all shadow-lg shadow-blue-200">
+                        Đăng Ký Ngay
+                    </button>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="bg-gray-900 text-white py-12 px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="p-2 bg-blue-600 rounded-lg">
+                                    <i data-lucide="hotel" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <h4 class="text-lg font-bold">Hotel Pro</h4>
+                            </div>
+                            <p class="text-gray-400">Phần mềm quản lý nhà nghỉ chuyên nghiệp và hiệu quả.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-4">Tính Năng</h4>
+                            <ul class="space-y-2 text-gray-400">
+                                <li><a href="#features-section" onclick="scrollToFeatures(); return false;" class="hover:text-white transition-all">Sơ đồ phòng</a></li>
+                                <li><a href="#features-section" onclick="scrollToFeatures(); return false;" class="hover:text-white transition-all">Thanh toán</a></li>
+                                <li><a href="#features-section" onclick="scrollToFeatures(); return false;" class="hover:text-white transition-all">Báo cáo</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-4">Liên Hệ</h4>
+                            <ul class="space-y-2 text-gray-400">
+                                <li>Email: support@hotelpro.vn</li>
+                                <li>Điện thoại: 1900 xxxx</li>
+                                <li>Hỗ trợ 24/7</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-800 pt-8">
+                        <p class="text-gray-400 text-center">&copy; 2024 Hotel Pro. Tất cả quyền được bảo lưu.</p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
     <!-- Auth Screen (Login & Register) -->
-    <div id="auth-screen">
+    <div id="auth-screen" class="hidden-section fixed inset-0 z-9999 flex items-center justify-center p-4 bg-gray-50">
         <!-- Login Form -->
         <div id="login-form" class="auth-card animate-slide-in">
             <div class="flex flex-col items-center mb-10">

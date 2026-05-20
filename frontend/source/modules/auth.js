@@ -40,11 +40,28 @@ export function logout() {
 
 export function checkAuth() {
     if (!currentUser) {
-        document.getElementById('auth-screen').classList.remove('hidden-section');
+        // Không đăng nhập - hiển thị trang chủ
+        const homepageScreen = document.getElementById('homepage-screen');
+        const authScreen = document.getElementById('auth-screen');
+        const mainSidebar = document.getElementById('main-sidebar');
+        const mainContent = document.getElementById('main-content');
+        
+        if (homepageScreen) homepageScreen.classList.remove('hidden-section');
+        if (authScreen) authScreen.classList.add('hidden-section');
+        if (mainSidebar) mainSidebar.classList.add('hidden-section');
+        if (mainContent) mainContent.classList.add('hidden-section');
     } else {
-        document.getElementById('auth-screen').classList.add('hidden-section');
-        document.getElementById('main-sidebar').classList.remove('hidden-section');
-        document.getElementById('main-content').classList.remove('hidden-section');
+        // Đã đăng nhập - hiển thị ứng dụng chính
+        const homepageScreen = document.getElementById('homepage-screen');
+        const authScreen = document.getElementById('auth-screen');
+        const mainSidebar = document.getElementById('main-sidebar');
+        const mainContent = document.getElementById('main-content');
+        
+        if (homepageScreen) homepageScreen.classList.add('hidden-section');
+        if (authScreen) authScreen.classList.add('hidden-section');
+        if (mainSidebar) mainSidebar.classList.remove('hidden-section');
+        if (mainContent) mainContent.classList.remove('hidden-section');
+        
         document.getElementById('user-display-name').innerText = currentUser.username;
         document.getElementById('user-display-role').innerText = currentUser.role === 'ADMIN' ? 'Quản lý' : 'Lễ tân';
         if (currentUser.role === 'ADMIN') {
