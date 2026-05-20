@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZMotel - Phần mềm quản lý nhà nghỉ toàn diện</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            background-color: #ffffff;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        /* Design tokens */
+        :root {
+            --color-primary: #2563eb;
+            --color-primary-dark: #1d4ed8;
+            --color-primary-light: #3b82f6;
+            --color-accent: #0f766e;
+            --color-background: #ffffff;
+            --color-foreground: #1f2937;
+            --color-border: #e5e7eb;
+            --color-gray-light: #f9fafb;
+            --color-gray-medium: #6b7280;
+            --radius-default: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-default);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-default);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--color-foreground);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.875rem;
+            }
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .navbar {
+            background-color: white;
+            border-bottom: 1px solid var(--color-border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .navbar-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .navbar-links {
+            display: none;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-links {
+                display: flex;
+            }
+        }
+
+        .navbar-links a {
+            color: var(--color-gray-medium);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .navbar-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .cta-banner {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-radius: 1rem;
+        }
+
+        .cta-banner h2 {
+            font-size: 1.875rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .cta-banner h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .overflow-hidden-img {
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-brand">EZMotel</div>
+            <div class="navbar-links">
+                <a href="#features">Tính năng</a>
+                <a href="#pricing">Giá cả</a>
+                <a href="#testimonials">Đánh giá</a>
+            </div>
+            <div class="navbar-actions">
+                <button class="hidden md:inline text-gray-600 font-medium hover:text-primary transition">Đăng nhập</button>
+                <button class="btn-primary">Dùng thử miễn phí</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16 md:py-24">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
+                        Quản Lý Nhà Nghỉ Toàn Diện, Tránh Thất Thoát 100%
+                    </h1>
+                    <p class="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed">
+                        Giải pháp quản lý hoàn hảo để tối ưu doanh thu, tăng hiệu suất làm việc và nâng cao trải nghiệm khách hàng.
+                    </p>
+                    <button class="btn-primary bg-white text-primary hover:bg-gray-100 text-lg px-8 py-4 font-semibold">
+                        Trải Nghiệm Miễn Phí Ngay
+                    </button>
+                </div>
+
+                <!-- Right Image -->
+                <div class="hidden md:block overflow-hidden-img fade-in" style="animation-delay: 0.2s;">
+                    <img src="images/dashboard-mockup.jpg" alt="Dashboard EZMotel" class="w-full rounded-lg shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 md:py-28 bg-white">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Tính Năng Nổi Bật</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Các công cụ mạnh mẽ được thiết kế để giúp bạn quản lý nhà nghỉ một cách hiệu quả và chuyên nghiệp.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 002 2h2a2 2 0 002-2m0 0V7m0 10a2 2 0 01-2 2h-2a2 2 0 01-2-2m0 0V7m0 0a2 2 0 012-2h2a2 2 0 012 2m0 0V7"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-foreground">Quản lý trạng thái phòng trực quan</h3>
+                    <p class="text-gray-600">Theo dõi trạng thái phòng (Trống, Đang ở, Chưa dọn) một cách dễ dàng với giao diện trực quan.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="feature-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-foreground">Tính tiền giờ, tiền đêm tự động chính xác</h3>
+                    <p class="text-gray-600">Hệ thống tính toán giá tự động, không còn sai sót, tiết kiệm thời gian và tăng độ chính xác.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="feature-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-foreground">Báo cáo doanh thu từ xa qua điện thoại</h3>
+                    <p class="text-gray-600">Xem báo cáo chi tiết doanh thu, lợi nhuận và thống kê bất cứ khi nào, ở bất cứ đâu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Benefits Section -->
+    <section class="py-20 md:py-28 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h2 class="section-title mb-8">Tại Sao Chọn EZMotel?</h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-foreground mb-2">Dễ sử dụng</h3>
+                                <p class="text-gray-600">Giao diện thân thiện, không cần đào tạo phức tạp.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-foreground mb-2">Hỗ trợ 24/7</h3>
+                                <p class="text-gray-600">Đội ngũ hỗ trợ luôn sẵn sàng giúp đỡ bạn.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-foreground mb-2">An toàn dữ liệu</h3>
+                                <p class="text-gray-600">Mã hóa end-to-end, bảo vệ thông tin khách hàng.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in" style="animation-delay: 0.2s;">
+                    <svg class="w-full" fill="none" stroke="currentColor" viewBox="0 0 400 300">
+                        <rect x="50" y="50" width="300" height="200" rx="8" fill="#f0f4ff" stroke="currentColor" stroke-width="2"></rect>
+                        <circle cx="100" cy="100" r="8" fill="#2563eb"></circle>
+                        <circle cx="150" cy="120" r="8" fill="#2563eb"></circle>
+                        <circle cx="200" cy="90" r="8" fill="#2563eb"></circle>
+                        <circle cx="250" cy="140" r="8" fill="#2563eb"></circle>
+                        <circle cx="300" cy="110" r="8" fill="#2563eb"></circle>
+                        <polyline points="100,100 150,120 200,90 250,140 300,110" stroke="#2563eb" stroke-width="2" fill="none"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 md:py-28 bg-white">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Khách Hàng Tin Tưởng Chúng Tôi</h2>
+                <p class="text-lg text-gray-600">Hàng ngàn chủ nhà nghỉ đã cải thiện doanh thu nhờ EZMotel.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 rounded-lg p-8 fade-in">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-700 mb-4">"EZMotel đã giúp tôi tăng doanh thu lên 40% trong 3 tháng đầu. Thực sự rất ấn tượng!"</p>
+                    <div class="font-semibold text-foreground">Nguyễn Văn A</div>
+                    <div class="text-sm text-gray-600">Chủ nhà nghỉ, TP.HCM</div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 rounded-lg p-8 fade-in" style="animation-delay: 0.1s;">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Quản lý dễ dàng, tiết kiệm thời gian và không còn lo lắng về các lỗi tính toán."</p>
+                    <div class="font-semibold text-foreground">Trần Thị B</div>
+                    <div class="text-sm text-gray-600">Quản lý nhà nghỉ, Hà Nội</div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 rounded-lg p-8 fade-in" style="animation-delay: 0.2s;">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Công cụ tuyệt vời! Đội ngũ support rất nhiệt tình và chuyên nghiệp."</p>
+                    <div class="font-semibold text-foreground">Phạm Văn C</div>
+                    <div class="text-sm text-gray-600">CEO nhóm nhà nghỉ, Đà Nẵng</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 md:py-28 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Bảng Giá Linh Hoạt</h2>
+                <p class="text-lg text-gray-600">Chọn gói phù hợp với nhu cầu của bạn</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Pricing Card 1 -->
+                <div class="bg-white rounded-lg p-8 border border-gray-200 fade-in">
+                    <h3 class="text-xl font-bold mb-2">Starter</h3>
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-primary">99.000₫</span>
+                        <span class="text-gray-600">/tháng</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Quản lý tối đa 10 phòng</span></li>
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Báo cáo cơ bản</span></li>
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Hỗ trợ email</span></li>
+                    </ul>
+                    <button class="btn-secondary w-full">Chọn gói này</button>
+                </div>
+
+                <!-- Pricing Card 2 (Most Popular) -->
+                <div class="bg-white rounded-lg p-8 border-2 border-primary fade-in relative" style="animation-delay: 0.1s;">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        Phổ biến nhất
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Pro</h3>
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-primary">249.000₫</span>
+                        <span class="text-gray-600">/tháng</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Quản lý tối đa 50 phòng</span></li>
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Báo cáo nâng cao</span></li>
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Hỗ trợ ưu tiên</span></li>
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>API tích hợp</span></li>
+                    </ul>
+                    <button class="btn-primary w-full">Chọn gói này</button>
+                </div>
+
+                <!-- Pricing Card 3 -->
+                <div class="bg-white rounded-lg p-8 border border-gray-200 fade-in" style="animation-delay: 0.2s;">
+                    <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-primary">Tùy chỉnh</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Phòng không giới hạn</span></li>
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Tính năng tùy chỉnh</span></li>
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Hỗ trợ 24/7 dedicated</span></li>
+                        <li class="flex gap-2"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Triển khai trực tiếp</span></li>
+                    </ul>
+                    <button class="btn-secondary w-full">Liên hệ tư vấn</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="cta-banner mx-4 md:mx-0 my-20 md:my-28 md:rounded-2xl">
+        <div class="max-w-3xl mx-auto">
+            <h2>Sẵn sàng tối ưu doanh thu cho nhà nghỉ của bạn?</h2>
+            <p class="text-lg text-blue-100 mb-8">Bắt đầu dùng thử miễn phí ngay hôm nay. Không cần thẻ tín dụng.</p>
+            <button class="btn-primary bg-white text-primary hover:bg-gray-100 text-lg px-8 py-4 font-semibold">
+                Đăng ký ngay
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">EZMotel</h3>
+                    <p class="text-sm">Giải pháp quản lý nhà nghỉ toàn diện cho doanh nghiệp hiện đại.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Sản phẩm</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Tính năng</a></li>
+                        <li><a href="#" class="hover:text-white transition">Giá cả</a></li>
+                        <li><a href="#" class="hover:text-white transition">Bảo mật</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Công ty</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Về chúng tôi</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Pháp lý</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Chính sách riêng tư</a></li>
+                        <li><a href="#" class="hover:text-white transition">Điều khoản dịch vụ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-sm">
+                <p>&copy; 2024 EZMotel. Bảo lưu mọi quyền.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
