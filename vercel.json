@@ -1,11 +1,11 @@
 {
-  "buildCommand": "pip install -r requirements.txt",
-  "functions": {
-    "api/index.py": {
-      "runtime": "python@3.11"
-    }
-  },
+  "public": "public",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index.py" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
